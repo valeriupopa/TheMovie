@@ -81,7 +81,6 @@ class MovieDetailsViewController: UIViewController {
                     heightContraint.constant = observedObject.contentSize.height
             })
         }
-
     }
     
     @IBAction func backTapAction(_ sender: Any) {
@@ -170,7 +169,6 @@ extension MovieDetailsViewController: UICollectionViewDelegate{
         default:
             return CGSize(width: collectionView.bounds.size.width / 3 - 8, height: collectionView.bounds.size.width / 2 - 8)
         }
-        
     }
 }
 
