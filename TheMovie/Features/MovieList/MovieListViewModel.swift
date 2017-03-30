@@ -42,22 +42,5 @@
             
             // add dispose bag
             movieZipObservable.addDisposableTo(disposeBag)
-            
-            let publish1 = PublishSubject<Int>()
-            let publish2 = PublishSubject<Int>()
-            let concurrentScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
-            let mainScheduler = MainScheduler.instance
-            
-            Observable.of(publish1,publish2)
-                .observeOn(mainScheduler)
-                .merge()
-                .subscribeOn(mainScheduler)
-                .subscribe(onNext:{
-                    print($0)
-                })
-            publish1.onNext(20)
-            publish2.onNext(30)
-            publish1.onNext(40)
-     
         }
     }

@@ -65,7 +65,6 @@ class API {
                 }, onError: { (error) in
                     // Send empty array of movies
                     observer.onError(error)
-                    
                 })
             
             return Disposables.create {
@@ -122,6 +121,7 @@ class API {
             
             return Disposables.create()
         }
+
         return actorObservable
     }
 }
