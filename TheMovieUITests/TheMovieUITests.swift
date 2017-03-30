@@ -7,12 +7,14 @@
 //
 
 import XCTest
+import FBSnapshotTestCase
 
-class TheMovieUITests: XCTestCase {
+class TheMovieUITests: FBSnapshotTestCase {
         
     override func setUp() {
         super.setUp()
         
+        self.recordMode = false
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -30,6 +32,7 @@ class TheMovieUITests: XCTestCase {
     
     func testExample() {
         // Use recording to get started writing UI tests.
+        
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
