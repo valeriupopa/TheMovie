@@ -22,7 +22,6 @@ class LoginViewController: UIViewController {
     
     private var viewModel : AuthentificationViewModel!
     private let loginDisposeBag = DisposeBag()
-    static var index = 1
     
     // MARK: UI Lifecycle + Actions
     override func viewDidLoad() {
@@ -46,13 +45,13 @@ class LoginViewController: UIViewController {
     private func subscribe() {
         
         let errorDisposable = self.viewModel.errorMessage.asObservable()
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (error) in
                 UIAlertController.show(title: error, parent: self)
             })
         
         let loginSuccessDisposable = self.viewModel.loginSucceeded.asObserver()
-            .subscribeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 let movieListViewController = UIStoryboard(name: "MovieList", bundle: Bundle.main).instantiateInitialViewController()
                 self.present(movieListViewController!, animated: true, completion: nil)

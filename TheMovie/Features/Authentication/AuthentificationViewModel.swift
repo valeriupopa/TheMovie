@@ -14,9 +14,9 @@ import RxSwift
 class AuthentificationViewModel {
     
     // MARK: Public properties
-    var errorMessage = PublishSubject<String>()
-    var loginSucceeded = PublishSubject<Void>()
-    var loginActionActive = BehaviorSubject<Bool>(value: false)
+    public var errorMessage = PublishSubject<String>()
+    public var loginSucceeded = PublishSubject<Void>()
+    public var loginActionActive = BehaviorSubject<Bool>(value: false)
     
     // MARK: Private Properties
     private let disposeBag = DisposeBag()
