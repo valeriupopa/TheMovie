@@ -1,5 +1,5 @@
 //
-//  AuthentificationViewModel.swift
+//  AuthenticationViewModel.swift
 //  TheMovie
 //
 //  Created by Valeriu POPA on 1/12/17.
@@ -11,7 +11,7 @@ import Realm
 import RealmSwift
 import RxSwift
 
-class AuthentificationViewModel {
+class AuthenticationViewModel {
     
     // MARK: Public properties
     public var errorMessage = PublishSubject<String>()
@@ -20,7 +20,7 @@ class AuthentificationViewModel {
     
     // MARK: Private Properties
     private let disposeBag = DisposeBag()
-    private let authentification = UserAuthentification()
+    private let authentication = UserAuthentication()
     
     init(userNameObservable: Observable<String?>, passwordObservable passwordRX: Observable<String?>) {
         
@@ -43,7 +43,7 @@ class AuthentificationViewModel {
     }
     
     public func loginAction(email: String, password: String) {
-        guard let _ = self.authentification.loginAction(email: email, password: password) else {
+        guard let _ = authentication.loginAction(email: email, password: password) else {
             errorMessage.onNext("No user found!")
             return
         }

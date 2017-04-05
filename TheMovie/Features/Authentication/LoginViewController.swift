@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var loginButton: TheMovieButton!
     @IBOutlet private weak var registerButton: TheMovieButton!
     
-    private var viewModel : AuthentificationViewModel!
+    private var viewModel : AuthenticationViewModel!
     private let loginDisposeBag = DisposeBag()
     
     // MARK: UI Lifecycle + Actions
@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
     
     // MARK: Private methods
     private func setup() {
-        self.viewModel = AuthentificationViewModel(userNameObservable: emailLabel.rx.text.asObservable(),
+        self.viewModel = AuthenticationViewModel(userNameObservable: emailLabel.rx.text.asObservable(),
                                                    passwordObservable: passwordLabel.rx.text.asObservable())
     }
     

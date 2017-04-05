@@ -20,7 +20,7 @@ class RegisterViewModel {
     private let birthDayObservable = PublishSubject<Date>()
     private let disposeBag = DisposeBag()
     
-    private static let authentification = UserAuthentification()
+    private static let authentication = UserAuthentication()
     private static let datePickerColor = UIColor(hexString: "#1CD15E")
     
     init(data: RegisterViewDataModel) {
@@ -39,7 +39,7 @@ class RegisterViewModel {
         
         registerSucceeded = data.registerActionObservable.withLatestFrom(inputsObservable)
             .map{ (cedentials: (password: String, name: String, email: String, bd: Date)) in
-            return RegisterViewModel.authentification.register(name: cedentials.name, email: cedentials.email, password: cedentials.password, birthday: cedentials.bd)
+            return RegisterViewModel.authentication.register(name: cedentials.name, email: cedentials.email, password: cedentials.password, birthday: cedentials.bd)
         }
         
         // subscribe for bd selection action

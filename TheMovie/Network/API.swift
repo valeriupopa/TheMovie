@@ -124,5 +124,9 @@ class API {
 
         return actorObservable
     }
+    
+    class func login(params: [String: Any], callBack success: (_ response: APIResponse)->Void) {
+    
+    }
 }
 

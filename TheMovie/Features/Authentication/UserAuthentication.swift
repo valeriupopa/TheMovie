@@ -1,5 +1,5 @@
 //
-//  UserAuthentification.swift
+//  UserAuthentication.swift
 //  TheMovie
 //
 //  Created by Valeriu POPA on 3/27/17.
@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class UserAuthentification {
+class UserAuthentication {
     public func register(name: String, email: String, password: String, birthday: Date){
         
         let user = UserData()
