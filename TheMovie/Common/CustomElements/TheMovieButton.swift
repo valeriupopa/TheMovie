@@ -17,20 +17,20 @@ class TheMovieButton: UIButton {
             self.layer.borderWidth = CGFloat(1)
         }
     }
-    
+
     @IBInspectable var borderColor: UIColor = UIColor(hexString: "#1CD15E") {
         didSet {
             self.layer.borderColor = borderColor.cgColor
         }
     }
-    
+
     @IBInspectable var titleColor: UIColor = UIColor.white {
         didSet {
             self.setTitleColor(titleColor, for: .normal)
             self.setTitleColor(titleColor, for: .selected)
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

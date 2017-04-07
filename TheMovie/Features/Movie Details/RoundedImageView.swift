@@ -16,16 +16,16 @@ class RoundedImageView: UIImageView {
             self.layer.borderColor = borderColor.cgColor
         }
     }
-    
+
     @IBInspectable var borderWidth: CGFloat = 1.0 {
         didSet {
             self.layer.borderWidth = borderWidth
         }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         self.layer.cornerRadius = self.frame.size.width / 2
         self.clipsToBounds = true
         self.layer.masksToBounds = true
@@ -34,22 +34,22 @@ class RoundedImageView: UIImageView {
 
 @IBDesignable
 class RoundedButton: UIButton {
-    
+
     @IBInspectable var borderColor: UIColor = UIColor.white {
         didSet {
             self.layer.borderColor = borderColor.cgColor
         }
     }
-    
+
     @IBInspectable var borderWidth: CGFloat = 1.0 {
         didSet {
             self.layer.borderWidth = borderWidth
         }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         self.layer.cornerRadius = self.frame.size.width / 2
         self.clipsToBounds = true
         self.layer.masksToBounds = true

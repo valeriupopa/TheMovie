@@ -13,56 +13,56 @@ import Realm
 import RealmSwift
 
 class LoginViewController: UIViewController {
-    
+
     // MARK: - Properties
     @IBOutlet private weak var emailLabel: UITextField!
     @IBOutlet private weak var passwordLabel: UITextField!
     @IBOutlet private weak var loginButton: TheMovieButton!
     @IBOutlet private weak var registerButton: TheMovieButton!
-    
+
     private var viewModel : AuthenticationViewModel!
     private let loginDisposeBag = DisposeBag()
-    
+
     // MARK: UI Lifecycle + Actions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.setup()
         self.subscribe()
     }
-    
+
     @IBAction func registerTapAction(_ sender: Any) {
         let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterViewController")
         self.navigationController?.pushViewController(registerViewController!, animated: true)
     }
-    
+
     // MARK: Private methods
     private func setup() {
         self.viewModel = AuthenticationViewModel(userNameObservable: emailLabel.rx.text.asObservable(),
                                                    passwordObservable: passwordLabel.rx.text.asObservable())
     }
-    
+
     private func subscribe() {
-        
+
         let errorDisposable = self.viewModel.errorMessage.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (error) in
                 UIAlertController.show(title: error, parent: self)
             })
-        
+
         let loginSuccessDisposable = self.viewModel.loginSucceeded.asObserver()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 let movieListViewController = UIStoryboard(name: "MovieList", bundle: Bundle.main).instantiateInitialViewController()
                 self.present(movieListViewController!, animated: true, completion: nil)
             })
-        
+
         let loginButtonActiveDisposable = self.viewModel.loginActionActive.bindTo(self.loginButton.rx.isEnabled)
-        
+
         let loginActionDisposable = self.loginButton.rx.tap.asObservable().bindNext { [unowned self] in
             self.viewModel.loginAction(email: self.emailLabel.text!, password: self.passwordLabel.text!)
         }
-        
+
         loginActionDisposable.addDisposableTo(loginDisposeBag)
         loginSuccessDisposable.addDisposableTo(loginDisposeBag)
         errorDisposable.addDisposableTo(loginDisposeBag)

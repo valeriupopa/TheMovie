@@ -9,13 +9,13 @@
 import Foundation
 import RxSwift
 
-
 class ActorListViewModel {
 
     var actors: Variable<[Actor]> = Variable([])
+    // swiftlint:disable:next identifier_name
     private let api = API()
     private let actorDisposeBag = DisposeBag()
-    
+
     init() {
         _ = api.getPopularActors()
         .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .background))

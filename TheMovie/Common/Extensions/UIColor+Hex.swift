@@ -25,12 +25,16 @@ extension UIColor {
         default:
             (r, g, b) = (1, 1, 0)
         }
-        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(255 * alpha) / 255)
+        self.init(red: CGFloat(r) / 255,
+                green: CGFloat(g) / 255,
+                 blue: CGFloat(b) / 255,
+                alpha: CGFloat(255 * alpha) / 255)
     }
 
     /*
      - Brief: Constructs a new UIColor from hexadecimal number and alpha value.
      */
+    // swiftlint:disable:next identifier_name
     convenience init(rgb: UInt, alpha: CGFloat) {
         self.init(
             red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,

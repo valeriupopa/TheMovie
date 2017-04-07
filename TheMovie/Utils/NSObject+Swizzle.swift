@@ -10,13 +10,13 @@ import Foundation
 
 extension NSObject {
     class func swizzleMethods(originalSelector: Selector, withSelector: Selector, forClass: AnyClass) {
-        
+
         let originalMethod = class_getInstanceMethod(forClass, originalSelector)
         let swizzleMethod = class_getInstanceMethod(forClass, withSelector)
-        
+
         method_exchangeImplementations(originalMethod, swizzleMethod)
     }
-    
+
     func swizzleMethods(originalSelector: Selector, withSelector: Selector) {
         let targetClass : AnyClass = object_getClass(self)
         NSObject.swizzleMethods(originalSelector: originalSelector, withSelector: withSelector, forClass: targetClass)

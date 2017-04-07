@@ -17,7 +17,8 @@ target 'TheMovie' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
-  pod ‘Hero’
+  pod 'Hero'
+  pod 'SwiftLint'
 
   target 'TheMovieTests' do
     inherit! :search_paths

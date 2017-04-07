@@ -16,13 +16,13 @@ struct Actor: JSONObjectInitialization {
     let name: String
     let popularity: Double
     let knownFor: [Movie]
-    
+
     var info: String {
         return self.knownFor.reduce("", { (result, movie) -> String in
             "\(result)\(movie.title)\n"
         })
     }
-    
+
     init?(json: JSON) {
         self.profilePath = URL(string: API.imagePath + json["profile_path"].stringValue)
         self.adult = json["adult"].boolValue
@@ -34,7 +34,7 @@ struct Actor: JSONObjectInitialization {
         self.name = json["name"].stringValue
         self.popularity = json["popularity"].doubleValue
     }
-    
+
     public static func build(json: JSON) -> [Actor] {
         var actors = [Actor]()
         json.array?.forEach({ (jsonItem) in
@@ -42,7 +42,7 @@ struct Actor: JSONObjectInitialization {
                 actors.append(actor)
             }
         })
-        
+
         return actors
     }
 }

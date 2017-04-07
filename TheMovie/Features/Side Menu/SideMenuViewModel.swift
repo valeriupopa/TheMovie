@@ -15,11 +15,11 @@ class SideMenuViewModel {
         SideMenuData(leftImage: "MovieList",
                     rightImage: "RightArrow",
                          title:"Movie List"),
-        
+
         SideMenuData(leftImage: "ActorList",
                     rightImage: "RightArrow",
                          title:"Actors List"),
-        
+
         SideMenuData(leftImage: "FavoritesList",
                     rightImage: "RightArrow",
                          title:"Favorites List"),
@@ -27,16 +27,16 @@ class SideMenuViewModel {
         SideMenuData(leftImage: "Profile",
                     rightImage: "RightArrow",
                          title:"Profile"),
-        
+
         SideMenuData(leftImage: "Map",
                     rightImage: "RightArrow",
                          title:"Map")
         ])
-    
+
     var viewController = PublishSubject<UIViewController>()
-    
+
     func sideMenuAction(for index: Int) {
-        
+
         var viewController: UIViewController?
         switch index {
         // movie list
@@ -56,11 +56,11 @@ class SideMenuViewModel {
             viewController = Screen.map.viewController
         default: break
         }
-        
+
         guard let controller = viewController else {
             return
         }
-        
+
         self.viewController.onNext(controller)
     }
 }

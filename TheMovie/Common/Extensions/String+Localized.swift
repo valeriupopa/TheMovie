@@ -17,10 +17,10 @@ public extension String {
 
         let baseLanguage = "Base"
         var preferredLanguage = "en"
-        if Bundle.main.preferredLocalizations.count > 0 {
+        if !Bundle.main.preferredLocalizations.isEmpty {
             preferredLanguage = Bundle.main.preferredLocalizations.first!
         }
-        
+
         if let path = Bundle.main.path(forResource: preferredLanguage, ofType: "lproj"), let bundle = Bundle(path: path) {
             return bundle.localizedString(forKey: self, value: nil, table: nil)
         } else if let path = Bundle.main.path(forResource: baseLanguage, ofType: "lproj"), let bundle = Bundle(path: path) {

@@ -12,9 +12,9 @@ import RxSwift
 import RxCocoa
 
 class MovieDetailsViewController: UIViewController {
-    
+
     // MARK: - Properties
-    @IBOutlet fileprivate weak var featuredCrewCollectionView: UICollectionView!{
+    @IBOutlet fileprivate weak var featuredCrewCollectionView: UICollectionView! {
         didSet {
             MovieCrewCollectionViewCell.register(to: featuredCrewCollectionView)
         }
@@ -34,30 +34,30 @@ class MovieDetailsViewController: UIViewController {
             viewModel = MovieDetailsViewModel(movie: movie)
         }
     }
-    
+
     internal var viewModel: MovieDetailsViewModel!
     internal let movieDisposeBad = DisposeBag()
-    
+
     // MARK: - UI Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.isHeroEnabled = true
-        
+
         self.view.heroID = "movie_poster"
         self.view.heroModifiers = [.fade, .translate(x:0, y:-250), .rotate(x:-1.6), .scale(1.5)]
-        
+
         self.subscribe()
         self.configure()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.featuredCrewCollectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context: nil)
         self.topBilledCollectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context: nil)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.featuredCrewCollectionView.removeObserver(self, forKeyPath: "contentSize")
@@ -66,7 +66,7 @@ class MovieDetailsViewController: UIViewController {
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let observedObject = object as? UICollectionView {
-            
+
             var heightContraint: NSLayoutConstraint!
             switch observedObject {
             case self.featuredCrewCollectionView:
@@ -76,27 +76,27 @@ class MovieDetailsViewController: UIViewController {
                 heightContraint = topBilledHeightConstraint
                 break
             }
-            
+
             UIView.animate(withDuration: 0.8, animations: {
                     heightContraint.constant = observedObject.contentSize.height
             })
         }
     }
-    
+
     @IBAction func backTapAction(_ sender: Any) {
 //        _ = self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func configure() {
         self.title = self.movie.title
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "#060B20")
     }
-    
+
     private func subscribe() {
-        
+
         // Bind overview to label
         _ = viewModel.overview.asObservable()
         .subscribeOn(MainScheduler.instance)
@@ -104,7 +104,7 @@ class MovieDetailsViewController: UIViewController {
             self.overviewLabel.text = overview
         })
         .addDisposableTo(movieDisposeBad)
-        
+
         // Bind poster URL to image view
         _ = viewModel.posterURL.asObservable()
         .subscribeOn(MainScheduler.instance)
@@ -114,7 +114,7 @@ class MovieDetailsViewController: UIViewController {
             }
         })
         .addDisposableTo(movieDisposeBad)
-        
+
         // Bind cast members to collection view
         _ = viewModel.credits.asObservable()
         .bindTo(topBilledCollectionView.rx.items) { (collectionView, row, element) in
@@ -122,32 +122,32 @@ class MovieDetailsViewController: UIViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieActorCollectionViewCell.identifier, for: indexPath) as? MovieActorCollectionViewCell else {
                 return MovieActorCollectionViewCell()
             }
-            
+
             cell.configure(cast: element)
-            
+
             return cell
         }.addDisposableTo(movieDisposeBad)
-        
+
         // Bind crew members to collection view
         _ = viewModel.crew.asObservable()
             .bindTo(featuredCrewCollectionView.rx.items) { (collectionView, row, element) in
-        
+
             let indexPath = IndexPath(row: row, section: 0)
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCrewCollectionViewCell.identifier, for: indexPath) as? MovieCrewCollectionViewCell else {
                 return MovieCrewCollectionViewCell()
             }
-            
+
             cell.configure(crew: element)
-            
+
             return cell
         }.addDisposableTo(movieDisposeBad)
     }
 }
 
-extension MovieDetailsViewController: UICollectionViewDelegate{
-    
+extension MovieDetailsViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         switch collectionView {
         case featuredCrewCollectionView:
             let crewMember = self.viewModel.crew.value[indexPath.row]
@@ -159,7 +159,7 @@ extension MovieDetailsViewController: UICollectionViewDelegate{
             break
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -171,16 +171,3 @@ extension MovieDetailsViewController: UICollectionViewDelegate{
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

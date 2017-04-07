@@ -14,32 +14,32 @@ protocol JSONObjectInitialization {
 }
 
 struct Crew: JSONObjectInitialization {
-    
+
     let creditID: String
     let department: String
     let id: Int
     let job: String
     let name: String
     let profilePath: URL?
-    
+
     init?(json: JSON) {
         guard let creditID = json["credit_id"].string else {
             return nil
         }
         self.creditID = creditID
-        
+
         self.department = json["department"].stringValue
-        
+
         guard let id = json["id"].int else {
             return nil
         }
         self.id = id
-        
+
         self.job = json["job"].stringValue
         self.name = json["name"].stringValue
         self.profilePath = URL(string: json["profile_path"].stringValue)
     }
-    
+
     // Extract credits from json received from api.
     static func build(json: JSON) -> [Crew] {
         var crew = [Crew]()
@@ -48,7 +48,7 @@ struct Crew: JSONObjectInitialization {
                 crew.append(movie)
             }
         })
-        
+
         return Array(crew.prefix(6))
     }
 }

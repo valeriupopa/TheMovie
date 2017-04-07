@@ -16,7 +16,7 @@ class UserData: Object {
     dynamic var password: String = ""
     dynamic var birthday: Date = Date()
     dynamic var profile: String? = nil
-    
+
     override static func primaryKey() -> String? {
         return "email"
     }

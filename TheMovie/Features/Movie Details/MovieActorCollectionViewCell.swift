@@ -9,23 +9,23 @@
 import UIKit
 import RxCocoa
 
-class MovieActorCollectionViewCell: UICollectionViewCell, UICustomCellRegister{
+class MovieActorCollectionViewCell: UICollectionViewCell, UICustomCellRegister {
 
     static var identifier: String = "MovieActorCollectionViewCell"
 
     @IBOutlet weak var actorImageView: RoundedImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var characterLAbel: UILabel!
-    
+
     func configure(cast: Cast) {
         if let profilePath = cast.profilePath {
             self.actorImageView.af_setImage(withURL: profilePath)
         }
-        
+
         self.titleLabel.text = cast.name
         self.characterLAbel.text = cast.character
-    
+
         self.actorImageView.borderWidth = 1.0
     }
-    
+
 }

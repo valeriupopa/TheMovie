@@ -9,7 +9,7 @@
 import UIKit
 
 extension UICollectionView {
-    
+
     func register(cell : AnyClass) {
         let identifier = "\(type(of: cell))"
         self.register(cell, forCellWithReuseIdentifier: identifier)

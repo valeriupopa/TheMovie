@@ -17,7 +17,7 @@ struct Cast: JSONObjectInitialization {
     let name: String
     let order: Int
     let profilePath: URL?
-    
+
     init?(json: JSON) {
         self.castID = json["cast_id"].intValue
         self.character = json["character"].stringValue
@@ -30,7 +30,7 @@ struct Cast: JSONObjectInitialization {
         self.order = json["order"].intValue
         self.profilePath = URL(string: API.imagePath + json["profile_path"].stringValue)
     }
-    
+
     // Extract credits from json received from api.
     static func build(json: JSON) -> [Cast] {
         var credits = [Cast]()
@@ -39,7 +39,7 @@ struct Cast: JSONObjectInitialization {
                 credits.append(movie)
             }
         })
-        
+
         return Array(credits.prefix(6))
     }
 }

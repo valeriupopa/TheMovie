@@ -17,10 +17,11 @@ enum Screen {
     case profile
     case sideMenu
     case favorites
+    // swiftlint:disable:next identifier_name
     case map
-    
+
     var identifier: String {
-        
+
         var viewControllerClass: AnyClass?
         switch self {
         case .login:
@@ -40,14 +41,14 @@ enum Screen {
         case .map:
             viewControllerClass = MapViewController.self
         }
-        
+
         guard let targetClass = viewControllerClass else {
             return ""
         }
-        
+
         return "\(targetClass)"
     }
-    
+
     var storyboardIdentifier: StoryboardIdentifier {
         switch self {
         case .login,.register:
@@ -64,25 +65,26 @@ enum Screen {
             return .map
         }
     }
-    
+
     var storyboard: UIStoryboard {
         return UIStoryboard(name: self.storyboardIdentifier.name, bundle: Bundle.main)
     }
-    
+
     var viewController: UIViewController {
         return self.storyboard.instantiateViewController(withIdentifier: self.identifier)
     }
 }
 
 enum StoryboardIdentifier: String {
-    
+
     case authentication = "Authentication"
     case actors = "ActorList"
     case sideMenu = "SideMenu"
     case movieDetails = "MovieDetails"
     case movies = "MovieList"
+    // swiftlint:disable:next identifier_name
     case map = "Map"
-    
+
     var name: String {
         return self.rawValue
     }

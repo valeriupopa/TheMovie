@@ -18,14 +18,14 @@ class TheMovieTextField: LocalizableTextField {
             self.textColor = color
         }
     }
-    
+
     @IBInspectable var cornerRadius: CGFloat = 5.0 {
         didSet {
             self.layer.cornerRadius = cornerRadius
             self.layer.borderWidth = CGFloat(1)
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
